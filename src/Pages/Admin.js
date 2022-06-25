@@ -20,6 +20,7 @@ export default function Admin() {
   const [ticketUpdateCurr, setTicketUpdateCurr] = useState({});
   const [ticketUpdateModal, setTicketUpdateModal] = useState(false);
   const [ticketCount, setTicketCount] = useState({});
+  const [showTable, setShowTable] = useState(false)
 
   const updateSelectedCurrTicket = (data) => setTicketUpdateCurr(data)
 
@@ -115,12 +116,21 @@ export default function Admin() {
     if (e.target.name === "title") {
       ticketUpdateCurr.title = e.target.value
     }
+    // else if(e.target.name === "description"){
+    //   ticketUpdateCurr.description = e.target.value
+    // }
     updateSelectedCurrTicket(Object.assign({}, ticketUpdateCurr))
   }
   console.log(ticketCount);
 
+  const userDetail =()=>{
+    setShowTable(true)
+  }
+  const adminDetail = ()=>{
+    setShowTable(false)
+  }
   return (
-    <div className="bg-light vh-100">
+    <div className="vh-100">
       <div className="row">
         <div className="col-1">
           <Sidebar />
@@ -130,11 +140,12 @@ export default function Admin() {
           <p className="text-muted text-center">Take a quick look at your stats below</p>
 
           {/* STATS CARDS START HERE */}
+          <div className="container">
           <div className="row my-5 mx-2 text-center">
-            <div className="col my-1 p-2 ">
-              <div className="card bg-primary bg-opacity-25 " style={{ width: 12 + 'rem' }}>
-                <div className="cardbody borders_b">
-                  <h5 className="card-subtitle my-1">
+            <div className="col my-1 p-2">
+              <div className="card" style={{ width: 12 + 'rem' }}>
+                <div className="box borders_b">
+                  <h5 className="card-subtitle my-1 fw-bold text-success">
                     <BorderColorIcon/>
                     Open
                   </h5>
@@ -145,8 +156,8 @@ export default function Admin() {
                       <div style={{ height: 30, width: 30 }}>
                         <CircularProgressbar value={ticketCount.open}
                           styles={buildStyles({
-                            textColor: "blue",
-                            pathColor: "darkBlue",
+                            textColor: "green",
+                            pathColor: "darkGreen",
                           })} />
                       </div>
                     </div>
@@ -157,9 +168,9 @@ export default function Admin() {
 
             </div>
             <div className="col my-1 p-2 ">
-              <div className="card bg-danger bg-opacity-25 " style={{ width: 12 + 'rem' }}>
-                <div className="cardbody borders_y">
-                  <h5 className="card-subtitle my-1">
+              <div className="card" style={{ width: 12 + 'rem' }}>
+                <div className="box1 cardbody borders_y">
+                  <h5 className="card-subtitle my-1 fw-bold text-danger">
                     <AutorenewIcon className="text-danger bg-opacity-25" />
                     Progress
                   </h5>
@@ -183,9 +194,9 @@ export default function Admin() {
             </div>
             <div className="col my-1 p-2 ">
               <div className="card bg-success bg-opacity-25 " style={{ width: 12 + 'rem' }}>
-                <div className="cardbody borders_c">
-                  <h5 className="card-subtitle my-1">
-                    <CheckCircleOutlineIcon className="text-success" />
+                <div className="box2 cardbody borders_c">
+                  <h5 className="card-subtitle my-1 fw-bold text-success">
+                    <CheckCircleOutlineIcon className="" />
                     Closed
                   </h5>
                   <hr />
@@ -208,8 +219,8 @@ export default function Admin() {
             </div>
             <div className="col my-1 p-2 ">
               <div className="card bg-primary bg-opacity-10" style={{ width: 12 + 'rem' }}>
-                <div className="cardbody borders_b">
-                  <h5 className="card-subtitle my-1">
+                <div className="box3 cardbody borders_b">
+                  <h5 className="card-subtitle my-1 fw-bold">
                     <BlockIcon />
                     Blocked
                   </h5>
@@ -232,11 +243,14 @@ export default function Admin() {
 
             </div>
           </div>
-
+          </div>
           <hr />
 
+            {!showTable ? 
           <div className="container">
-            <MaterialTable
+          <center><button onClick={userDetail} className="btn btn-lg fw-bolder">User Details</button></center>
+            <div className="table">
+             <MaterialTable
           onRowClick={(event, ticketList) => editTicket(ticketList)}
               columns={[
                 {
@@ -297,34 +311,12 @@ export default function Admin() {
 
               title="TICKET RECORDS"
             />
+            </div>
           </div>
-
-          {ticketUpdateModal ? (
-            <Modal
-              show={ticketUpdateModal}
-              onHide={onCloseTicketModal}
-              backdrop="static"
-              centered >
-              <Modal.Header closeButton>
-                <Modal.Title>Update Ticket</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <form onSubmit={updateTicket}>
-                  <div className="p-1">
-                    <h5 className="text-primary">Ticket ID :{ticketUpdateCurr.id}</h5>
-                    <div className="input-group">
-                      <label className="label input-group-text label-md"> Title
-                      </label>
-                      <input type="text" className="form-control" name="title" value={ticketUpdateCurr.title} onChange={onTicketUpdate} />
-                    </div>
-                    <button type="submit" className="my-1">Update</button>
-                  </div>
-                </form>
-              </Modal.Body>
-            </Modal>
-          ) : ("")}
-
+              :
           <div className="container">
+          <center><button onClick={adminDetail} className="btn fw-bolder btn-lg">Admin Details</button></center>
+            <div className="table">
             <MaterialTable
 
         // onRowClick={(rowData, userId)=> getAllUser(rowData.userId)}
@@ -385,9 +377,37 @@ export default function Admin() {
 
               title="USER RECORDS"
             />
+            </div>
           </div>
+            }
 
-          <button className="btn btn-primary btn-sm" onClick={showUserModal}>Open Modal</button>
+          {ticketUpdateModal ? (
+            <Modal
+              show={ticketUpdateModal}
+              onHide={onCloseTicketModal}
+              backdrop="static"
+              centered >
+              <Modal.Header closeButton>
+                <Modal.Title>Update Ticket</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <form onSubmit={updateTicket}>
+                  <div className="p-1">
+                    <h5 className="text-primary">Ticket ID :{ticketUpdateCurr.id}</h5>
+                    <div className="input-group">
+                      <label className="label input-group-text label-md"> Title </label>
+                      <input type="text" className="form-control" name="title" value={ticketUpdateCurr.title} onChange={onTicketUpdate} />
+                    </div>
+                    <div className="input-group">
+                      <label className="label input-group-text label-md"> Description </label>
+                      <input type="text" className="form-control" name="title" value={ticketUpdateCurr.description} onChange={onTicketUpdate} />
+                    </div>
+                    <button type="submit" className="btn btn-success my-1">Update</button>
+                  </div>
+                </form>
+              </Modal.Body>
+            </Modal>
+          ) : ("")}
         </div>
       </div>
     </div>

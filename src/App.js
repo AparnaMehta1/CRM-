@@ -9,6 +9,8 @@ import NotFound from "./Components/NotFound";
 import Unauthorized from "./Components/Unauthorized";
 import "bootstrap/dist/css/bootstrap.min.css";
 import '@coreui/coreui/dist/css/coreui.min.css';
+
+
 import './App.css'
 
 
@@ -20,6 +22,7 @@ const ROLES = {
 
 function App() {
   return (
+    <>
     <Router>
       <Routes>
         <Route
@@ -44,6 +47,7 @@ function App() {
           <Route path="/*" element={<NotFound />} />
       </Routes>
     </Router>
+    </>
   );
 }
 

@@ -1,0 +1,29 @@
+.cards{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+
+.signin{
+    border: 2px solid black;
+    padding: 40px;
+    border-radius: 20px;
+    color: white;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+.backGround{
+    height: 100vh;
+    width: 100%;
+}
+
+video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
