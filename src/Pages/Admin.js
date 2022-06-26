@@ -52,7 +52,11 @@ export default function Admin() {
       if (x.status === "OPEN")
         data.open += 1
       else if(x.status === "IN_PROGRESS") 
-        data.pending +=1
+        data.pending += 1
+        else if(x.status === "CLOSED")
+        data.closed += 1
+        else if(x.status === "BLOCKED")
+        data.blocked += 1
     })
     setTicketCount(Object.assign({}, data))
   }
@@ -116,9 +120,9 @@ export default function Admin() {
     if (e.target.name === "title") {
       ticketUpdateCurr.title = e.target.value
     }
-    // else if(e.target.name === "description"){
-    //   ticketUpdateCurr.description = e.target.value
-    // }
+    else if(e.target.name === "description"){
+      ticketUpdateCurr.description = e.target.value
+    }
     updateSelectedCurrTicket(Object.assign({}, ticketUpdateCurr))
   }
   console.log(ticketCount);
@@ -129,6 +133,7 @@ export default function Admin() {
   const adminDetail = ()=>{
     setShowTable(false)
   }
+
   return (
     <div className="vh-100">
       <div className="row">
@@ -136,8 +141,8 @@ export default function Admin() {
           <Sidebar />
         </div>
         <div className="container col m-1">
-          <h3 className="text-primary text-center">Welcome Admin</h3>
-          <p className="text-muted text-center">Take a quick look at your stats below</p>
+          <h3 className="text-primary text-center text-light">Welcome Admin</h3>
+          <p className="text-center text-light">Take a quick look at your stats below</p>
 
           {/* STATS CARDS START HERE */}
           <div className="container">
@@ -176,10 +181,10 @@ export default function Admin() {
                   </h5>
                   <hr />
                   <div className="row">
-                    <div className="col"></div>
+                    <div className="col">{ticketCount.pending}</div>
                     <div className="col my-1">
                       <div style={{ height: 30, width: 30 }}>
-                        <CircularProgressbar 
+                        <CircularProgressbar value={ticketCount.pending}
                           styles={buildStyles({
                             textColor: "red",
                             pathColor: "Red",
@@ -201,10 +206,10 @@ export default function Admin() {
                   </h5>
                   <hr />
                   <div className="row">
-                    <div className="col">2</div>
+                    <div className="col">{ticketCount.closed}</div>
                     <div className="col my-1">
                       <div style={{ height: 30, width: 30 }}>
-                        <CircularProgressbar value={80}
+                        <CircularProgressbar value={ticketCount.closed}
                           styles={buildStyles({
                             textColor: "green",
                             pathColor: "Green",
@@ -226,10 +231,10 @@ export default function Admin() {
                   </h5>
                   <hr />
                   <div className="row">
-                    <div className="col">1</div>
+                    <div className="col">{ticketCount.blocked}</div>
                     <div className="col my-1">
                       <div style={{ height: 30, width: 30 }}>
-                        <CircularProgressbar value={30}
+                        <CircularProgressbar value={ticketCount.blocked}
                           styles={buildStyles({
                             textColor: "blue",
                             pathColor: "darkBlue",
@@ -248,7 +253,7 @@ export default function Admin() {
 
             {!showTable ? 
           <div className="container">
-          <center><button onClick={userDetail} className="btn btn-lg fw-bolder">User Details</button></center>
+          <center><button onClick={userDetail} className="btn btn-lg fw-bolder text-light">User Details</button></center>
             <div className="table">
              <MaterialTable
           onRowClick={(event, ticketList) => editTicket(ticketList)}
@@ -315,7 +320,7 @@ export default function Admin() {
           </div>
               :
           <div className="container">
-          <center><button onClick={adminDetail} className="btn fw-bolder btn-lg">Admin Details</button></center>
+          <center><button onClick={adminDetail} className="btn fw-bolder btn-lg text-light">Admin Details</button></center>
             <div className="table">
             <MaterialTable
 
@@ -400,7 +405,7 @@ export default function Admin() {
                     </div>
                     <div className="input-group">
                       <label className="label input-group-text label-md"> Description </label>
-                      <input type="text" className="form-control" name="title" value={ticketUpdateCurr.description} onChange={onTicketUpdate} />
+                      <input type="text" className="form-control" name="description" value={ticketUpdateCurr.description} onChange={onTicketUpdate} />
                     </div>
                     <button type="submit" className="btn btn-success my-1">Update</button>
                   </div>

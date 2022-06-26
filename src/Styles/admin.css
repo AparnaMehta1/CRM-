@@ -10,7 +10,7 @@
     border-radius: 5px;
 } */
 body{
-    background-image: url("https://th.bing.com/th/id/OIP.KvNm_WZ05J-FigoMzW2ZKgHaEK?pid=ImgDet&rs=1");
+    background-image: url("https://images7.alphacoders.com/686/686901.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -42,6 +42,7 @@ body{
 .box::after{
     content: '';
     z-index: -1;
+    border-radius: 5px;
     position: absolute;
     width: calc(100% + 6px);
     height: calc(100% + 6px);
@@ -65,6 +66,7 @@ body{
 .box1::after{
     content: '';
     z-index: -1;
+    border-radius: 5px;
     position: absolute;
     width: calc(100% + 6px);
     height: calc(100% + 6px);
@@ -89,6 +91,7 @@ body{
 .box2::after{
     content: '';
     z-index: -1;
+    border-radius: 5px;
     position: absolute;
     width: calc(100% + 6px);
     height: calc(100% + 6px);
@@ -112,6 +115,7 @@ body{
 .box3::after{
     content: '';
     z-index: -1;
+    border-radius: 5px;
     position: absolute;
     width: calc(100% + 6px);
     height: calc(100% + 6px);
@@ -128,20 +132,17 @@ body{
     filter: blur(20px);
 }
 
-
 .table {
     position: relative;
     background: #7a6c6c;
     color: #ffffff;
-    font-size: 38px;
-    font-weight: 700;
     text-align: center;
-    text-transform: uppercase;
 }
 .table::before,
 .table::after {
     content: '';
     z-index: -1;
+    border-radius: 5px;
     position: absolute;
     width: calc(100% + 6px);
     height: calc(100% + 6px);
@@ -170,4 +171,5 @@ body{
     }
     
 }
+
 

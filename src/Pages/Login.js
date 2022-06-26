@@ -3,6 +3,12 @@ import { DropdownButton, Dropdown } from "react-bootstrap";
 import { userSignup, userSignin } from "../api/auth";
 import { useNavigate } from 'react-router-dom';
 import videoBg from '../Styles/Video/video.mp4'
+import GoogleIcon from '@mui/icons-material/Google';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import userIcon from '../Styles/user.svg'
+import {GoogleLogin, GoogleLogout} from 'react-google-login'
 import '../Styles/Login.css';
 
 function Login() {
@@ -101,6 +107,9 @@ function Login() {
       });
   };
 
+  const gmailLogin=()=>{
+    window.location.href('https://accounts.google.com/ServiceLogin/signinchooser?service=mail&passive=1209600&osid=1&continue=https%3A%2F%2Fmail.google.com%2Fmail%2Fu%2F0%2F&followup=https%3A%2F%2Fmail.google.com%2Fmail%2Fu%2F0%2F&emr=1&flowName=GlifWebSignIn&flowEntry=ServiceLogin')
+  }
   return (
     <>
    <div className="backGround">
@@ -110,48 +119,56 @@ function Login() {
       <div className="login m-5 p-5">
         <div className="signin">
           <div className="col">
+          <center><img src={userIcon} /></center>
             {!signUp ? (
               <div className="login">
                 <form onSubmit={loginFn}>
-                  <h4 className="text-center p-3"> Login</h4>
+                  <h4 className="text text-center p-3"> Login</h4>
                   <input
-                    className="input-group m-2 form-control"
+                    className="form_input m-2 form-control"
+                    placeholder="Enter Your User Id"
                     type="text"
-                    placeholder="Enter your userId"
                     id="userId"
                     onChange={updateSignupData}
                     required
                   />
                   <input
-                    className="input-group m-2 form-control"
+                    className="m-2 form-control"
                     type="password"
-                    placeholder="Enter Password"
                     id="password"
+                    placeholder="Password"
                     onChange={updateSignupData}
                     required
                   />
-                  <button className="btn btn-primary m-2">
+                  <button className="button fw-bolder m-2">
                     Login
                   </button>
                   <div
-                    className="text-center text-info"
+                    className="toggle text-center fw-bolder"
                     onClick={() => toggleSignUp()}
                   >
                     Not a member? Signup
                   </div>
-                  <div className="text-danger text-center">{message}</div>
+                  <div className="text-warning text-center">{message}</div>
                 </form>
+                <div className="container mx-5">
+                <GoogleIcon className="social_icon" onClick={gmailLogin}/>
+                <FacebookIcon className="social_icon"/>
+                <TwitterIcon className="social_icon"/>
+                <GitHubIcon className="social_icon"/>
+                </div>
               </div>
             ) : (
               <div className="signup">
                 <form onSubmit={signupFn}>
-                  <h4 className="text-center p-3"> Signup</h4>
+                  <h4 className="text text-center p-3"> Signup</h4>
                   <input
                     className="input-group m-2 form-control"
                     type="text"
                     placeholder="Enter your Name"
                     id="username"
                     onChange={updateSignupData}
+                    required
                   />
                   <input
                     className="input-group m-2 form-control"
@@ -159,6 +176,7 @@ function Login() {
                     placeholder="Enter your userId"
                     id="userId"
                     onChange={updateSignupData}
+                    required
                   />
                   <input
                     className="input-group m-2 form-control"
@@ -166,6 +184,7 @@ function Login() {
                     placeholder="Enter your email"
                     id="email"
                     onChange={updateSignupData}
+                    required
                   />
                   <input
                     className="input-group m-2 form-control"
@@ -173,13 +192,14 @@ function Login() {
                     placeholder="Enter Password"
                     id="password"
                     onChange={updateSignupData}
+                    required
                   />
-                  <div className="input-group m-2 form-control">
-                    <span className="text-muted">User Type</span>
+                  <div className="input-group m-2 form-control bg-dark">
+                    <span className="text-light">User Type</span>
                     <DropdownButton
                       align="end"
                       title={userType}
-                      variant="light"
+                      variant="dark"
                       className="mx-2"
                       onSelect={handleSelect}
                     >
@@ -191,16 +211,16 @@ function Login() {
                       </Dropdown.Item>
                     </DropdownButton>
                   </div>
-                  <button className="btn btn-primary m-2 d-flex justify-content-center align-items-center">
+                  <button className="button m-2 d-flex justify-content-center align-items-center fw-bolder">
                     Signup
                   </button>
                   <div
-                    className="text-center text-info"
+                    className="toggle text-center fw-bolder"
                     onClick={() => toggleSignUp()}
                   >
                     Already a member? Login
                   </div>
-                  <div className="text-danger text-center">{message}</div>
+                  <div className="text-warning text-center">{message}</div>
                 </form>
               </div>
             )}

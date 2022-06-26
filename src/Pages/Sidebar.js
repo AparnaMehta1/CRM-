@@ -2,8 +2,13 @@ import { CSidebar, CNavItem, CNavTitle, CSidebarNav } from '@coreui/react'
 import HomeIcon from '@mui/icons-material/Home';
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import LogoutIcon from '@mui/icons-material/Logout';
+import '../Styles/Sidebar.css'
 
 export const Sidebar = () => {
+    const logoutFn =()=>{
+        localStorage.clear()
+        window.location.href("/login")
+    }
     return (
         <div>
             <CSidebar unfoldable className="bg-black vh-100 text-light">
@@ -21,11 +26,9 @@ export const Sidebar = () => {
                 </CNavItem>
                 <CNavItem className="d-flex">
                     <LogoutIcon className='mx-2 my-1'/>
-                    <div className="mx-5 my-1 fw-bold">Logout</div>
+                    <div className="logout mx-5 my-1 fw-bold" onClick={()=>logoutFn()}>Logout</div>
                 </CNavItem>
-
             </CSidebarNav>
-
         </CSidebar>
         </div>
     )
