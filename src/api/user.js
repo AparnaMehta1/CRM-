@@ -12,7 +12,7 @@ export async function getAllUsers() {
     )
 }
 
-export async function getUserData(userId, data) {
+export async function updateUserData(userId, data) {
     return await axios.put(`https://relevel-crm--backend.herokuapp.com/crm/api/v1/users/${userId}`, data,  
     {
         headers: {

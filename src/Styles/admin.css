@@ -9,11 +9,6 @@
     border-bottom: 5px solid darkblue;
     border-radius: 5px;
 } */
-body{
-    background-image: url("https://images7.alphacoders.com/686/686901.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-}
 .card:hover {
     transform:scale(1.05);
 }
@@ -36,8 +31,9 @@ body{
 
 .box{
     position: relative;
-    background: #c7ebe4;
+    background: #bdff2d;
 }
+
 .box::before,
 .box::after{
     content: '';
@@ -48,9 +44,7 @@ body{
     height: calc(100% + 6px);
     top: -2px;
     left: -2px;
-    background: linear-gradient(45deg,
-    #05bf05, #9bead9
-    );
+    background: linear-gradient(45deg, #0514bf, #a49bea);
     background-size: 300%;
     animation: border 20s linear infinite;
 }
@@ -159,6 +153,10 @@ body{
 .table::after {
     filter: blur(30px);
 }
+
+/* .table{
+    background: transparent;
+} */
 
 @keyframes border {
 

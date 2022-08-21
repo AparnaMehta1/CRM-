@@ -28,3 +28,12 @@ export async function ticketUpdation(id, ticketUpdateCurr) {
     }
     )
 }
+
+
+export const createNewTicketByCustomer = async data => {
+    return await axios.post('https://relevel-crm--backend.herokuapp.com/crm/api/v1/tickets', data, {
+        headers: {
+            "x-access-token": localStorage.getItem("accessToken"),
+        },
+    });
+};

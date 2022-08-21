@@ -1,18 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./Pages/Login";
 import { Suspense } from "react";
-import Admin from './Pages/Admin'
+import Admin1 from './Pages/Admin1';
 import RequireAuth from "./Components/RequireAuth";
-import Engineer from './Pages/Engineer'
-import Customer from './Pages/Customer'
+import Engineer from './Pages/Engineer';
+import Customer from './Pages/Customer';
 import NotFound from "./Components/NotFound";
 import Unauthorized from "./Components/Unauthorized";
 import "bootstrap/dist/css/bootstrap.min.css";
 import '@coreui/coreui/dist/css/coreui.min.css';
-
-
 import './App.css'
-
 
 const ROLES = {
   "CUSTOMER": "CUSTOMER",
@@ -20,7 +17,14 @@ const ROLES = {
   "ADMIN": "ADMIN",
 };
 
+// const theme = createTheme({
+//   palette:{
+//     type: "dark"
+//   }
+// })
+
 function App() {
+
   return (
     <>
     <Router>
@@ -34,16 +38,16 @@ function App() {
             </Suspense>
           }
         />
-        <Route path="unauthorized" element={<Unauthorized />} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
           {/* <Route element={<RequireAuth allowedRoles={[ROLES.ADMIN]} />}> */}
-            <Route path="/admin" exact element={<Admin />} />
+            <Route path="/admin1" exact element={<Admin1 />} />
           {/* </Route> */}
-          <Route element={<RequireAuth allowedRoles={[ROLES.CUSTOMER]} />}>
+          {/* <Route element={<RequireAuth allowedRoles={[ROLES.CUSTOMER]} />}> */}
             <Route path="/customer" element={<Customer />} />
-          </Route>
-          <Route element={<RequireAuth allowedRoles={[ROLES.ENGINEER]} />}>
+          {/* </Route> */}
+          {/* <Route element={<RequireAuth allowedRoles={[ROLES.ENGINEER]} />}> */}
             <Route path="/engineer" element={<Engineer />} />
-          </Route>
+          {/* </Route> */}
           <Route path="/*" element={<NotFound />} />
       </Routes>
     </Router>

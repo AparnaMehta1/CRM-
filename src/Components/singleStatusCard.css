@@ -1,0 +1,6 @@
+.cardElem{
+    border: 0.2px solid rgb(189, 180, 180);
+    border-radius: 10px;
+    box-sizing: border-box;
+    box-shadow: 10px 13px 15px black;
+}

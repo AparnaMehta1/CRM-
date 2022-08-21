@@ -1,14 +1,18 @@
-import { CSidebar, CNavItem, CNavTitle, CSidebarNav } from '@coreui/react'
+import { CSidebar, CNavItem, CNavTitle, CSidebarNav, CSidebarToggler, CFormSwitch } from '@coreui/react'
 import HomeIcon from '@mui/icons-material/Home';
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
+import Switch from '@mui/material/Switch';
 import LogoutIcon from '@mui/icons-material/Logout';
 import '../Styles/Sidebar.css'
 
-export const Sidebar = () => {
+export const Sidebar = ({check, change}) => {
     const logoutFn =()=>{
         localStorage.clear()
-        window.location.href("/login")
+        window.location.assign('/')
     }
+
+    const label = { inputProps: { 'aria-label': 'Switch demo' } };
+
     return (
         <div>
             <CSidebar unfoldable className="bg-black vh-100 text-light">
@@ -28,7 +32,9 @@ export const Sidebar = () => {
                     <LogoutIcon className='mx-2 my-1'/>
                     <div className="logout mx-5 my-1 fw-bold" onClick={()=>logoutFn()}>Logout</div>
                 </CNavItem>
+                <Switch {...label} className='my-3 mx-2' id="formSwitchCheckDefault" checked={check} onClick={change}/>
             </CSidebarNav>
+            <CSidebarToggler />
         </CSidebar>
         </div>
     )
