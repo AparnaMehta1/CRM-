@@ -111,9 +111,10 @@ function Customer() {
         <h2>Welcome_{localStorage.getItem("name")}</h2>
         <h5>User Type: {localStorage.getItem("userTypes")}</h5>
       </div>
-      <StatusCard ticketsCount={ticketsCount} />
       <div className="container">
-        <StatusCard />
+      <StatusCard ticketsCount={ticketsCount} />
+      </div>
+      <div className="container">
         <TicketTable ticketList={ticketList} editTicket={editTicket} />
 
         {ticketUpdateModal && <UpdateTicketModal onCloseModal={onCloseModal} ticketUpdateModal={ticketUpdateModal} ticketUpdateCurr={ticketUpdateCurr} cancelUpdate={cancelUpdate} handleTicketChange={handleTicketChange} onTicketUpdate={onTicketUpdate} />}
