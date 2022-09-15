@@ -6,7 +6,7 @@ const SingleStatusCard = props => {
     props;
 
   return (
-    <div className='col-xs-12 col-lg-3 col-md-6 '>
+    <div className='col-xs-12 col-lg-3 col-md-6 status_cards'>
       <div
         className={`cardElem  cardItem shadow  bg-${colorScheme} text-dark bg-opacity-10 borders-b`}
         style={{ width: 15 + "rem" }}

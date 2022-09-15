@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { fetchTicket, ticketUpdation, createNewTicketByCustomer } from "../api/ticket";
+import {
+  fetchTicket,
+  ticketUpdation,
+  createNewTicketByCustomer,
+} from "../api/ticket";
 import UpdateTicketModal from "../Components/Modal/UpdateTicketModal";
 import TicketTable from "../Components/TableDetails/TicketTable";
 import { Sidebar } from "./Sidebar";
@@ -10,118 +14,156 @@ import { getTicketsCount } from "../Utils/TicketCount";
 function Customer() {
   const [ticketList, setTicketList] = useState([]);
   const [ticketUpdateCurr, setTicketUpdateCurr] = useState({});
-  const [ticketUpdateModal, setTicketUpdateModal] = useState(false)
-  const [newTicketModal, setNewTicketModal] = useState(false)
+  const [ticketUpdateModal, setTicketUpdateModal] = useState(false);
+  const [newTicketModal, setNewTicketModal] = useState(false);
   const [ticketsCount, setTicketsCount] = useState({});
   const [newTicket, setNewTicket] = useState({
     title: "",
     description: "",
   });
   const onCloseModal = () => {
-    setTicketUpdateModal(false)
-  }
+    setTicketUpdateModal(false);
+  };
   const cancelUpdate = (e) => {
-    e.preventDefault()
-    setTicketUpdateCurr("")
-    setTicketUpdateModal(false)
-  }
+    e.preventDefault();
+    setTicketUpdateCurr("");
+    setTicketUpdateModal(false);
+  };
 
   useEffect(() => {
-    listOfTicketList()
-  }, [])
+    listOfTicketList();
+  }, []);
 
   const listOfTicketList = () => {
-    fetchTicket().then(res => {
-      if(res.status === 200){
-        const tickets = res.data
-        setTicketList(tickets)
-        const countMap = getTicketsCount(tickets);
-        setTicketsCount(countMap);
-      }
-    }).catch(err => {
-      console.log(err);
-    })
-  }
+    fetchTicket()
+      .then((res) => {
+        if (res.status === 200) {
+          const tickets = res.data;
+          setTicketList(tickets);
+          const countMap = getTicketsCount(tickets);
+          setTicketsCount(countMap);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const editTicket = (rowData) => {
-    const ticketData = { ...rowData }
-    setTicketUpdateCurr(ticketData)
-    setTicketUpdateModal(true)
+    const ticketData = { ...rowData };
+    setTicketUpdateCurr(ticketData);
+    setTicketUpdateModal(true);
     console.log(rowData);
-  }
+  };
 
   const handleTicketChange = (e) => {
-    const selectedTicket = { ...ticketUpdateCurr }
-    if (e.target.name === "title")
-      selectedTicket.title = e.target.value;
+    const selectedTicket = { ...ticketUpdateCurr };
+    if (e.target.name === "title") selectedTicket.title = e.target.value;
     if (e.target.name === "description")
       selectedTicket.description = e.target.value;
     if (e.target.name === "ticketPriority")
       selectedTicket.ticketPriority = e.target.value;
-    setTicketUpdateCurr(selectedTicket)
-  }
+    setTicketUpdateCurr(selectedTicket);
+  };
 
   const onTicketUpdate = (e) => {
     e.preventDefault();
     ticketUpdation(ticketUpdateCurr.id, ticketUpdateCurr)
-      .then(res => {
-        if (res.status === 200)
-          onCloseModal();
+      .then((res) => {
+        if (res.status === 200) onCloseModal();
         listOfTicketList();
-      }).catch(err => {
-        console.log(err);
       })
-  }
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const openNewTicketModal = (e) => {
-    e.preventDefault()
-    setNewTicketModal(true)
-  }
+    e.preventDefault();
+    setNewTicketModal(true);
+  };
 
   const handleClose = () => {
-    setNewTicketModal(false)
-  }
+    setNewTicketModal(false);
+  };
 
   const handleCreateTicketChange = (e) => {
-    const createTicket = { ...newTicket }
-    if (e.target.name === "title")
-      createTicket.title = e.target.value
+    const createTicket = { ...newTicket };
+    if (e.target.name === "title") createTicket.title = e.target.value;
     if (e.target.description === "description")
-      createTicket.description = e.target.value
+      createTicket.description = e.target.value;
 
-      setNewTicket(createTicket)
-  }
+    setNewTicket(createTicket);
+  };
 
   const createNewTicket = (e) => {
-    createNewTicketByCustomer(newTicket).then(res => {
-      if (res.status === 201) {
-        handleClose()
-        listOfTicketList()
-      }
-    }).catch(err => {
-      console.log(err);
+    createNewTicketByCustomer(newTicket)
+      .then((res) => {
+        if (res.status === 201) {
+          handleClose();
+          listOfTicketList();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    e.preventDefault();
+  };
+
+  const delTicket = (id)=>{
+    const newTicketList = ticketList.filter((t)=>{
+      return t.id !== id
     })
-    e.preventDefault()
-  }
+    setTicketList(newTicketList)
+}
 
   return (
-    <div >
-      <Sidebar  />
+    <div>
+      <Sidebar />
       <div className="container text-center vw-100">
         <h2>Welcome_{localStorage.getItem("name")}</h2>
         <h5>User Type: {localStorage.getItem("userTypes")}</h5>
       </div>
       <div className="container">
-      <StatusCard ticketsCount={ticketsCount} />
+        <StatusCard ticketsCount={ticketsCount} />
       </div>
       <div className="container">
-        <TicketTable ticketList={ticketList} editTicket={editTicket} />
+        <TicketTable 
+        ticketList={ticketList} 
+        editTicket={editTicket} 
+        delTicket={delTicket}
+        />
 
-        {ticketUpdateModal && <UpdateTicketModal onCloseModal={onCloseModal} ticketUpdateModal={ticketUpdateModal} ticketUpdateCurr={ticketUpdateCurr} cancelUpdate={cancelUpdate} handleTicketChange={handleTicketChange} onTicketUpdate={onTicketUpdate} />}
+        {ticketUpdateModal && (
+          <UpdateTicketModal
+            onCloseModal={onCloseModal}
+            ticketUpdateModal={ticketUpdateModal}
+            ticketUpdateCurr={ticketUpdateCurr}
+            cancelUpdate={cancelUpdate}
+            handleTicketChange={handleTicketChange}
+            onTicketUpdate={onTicketUpdate}
+          />
+        )}
 
-        <button className="btn btn-success w-100 m-5" onClick={openNewTicketModal}>Raise A Ticket</button>
+        <button
+          className="btn btn-success w-100 m-5"
+          onClick={openNewTicketModal}
+        >
+          Raise A Ticket
+        </button>
 
-        {newTicketModal && <NewTicketModal newTicketModal={newTicketModal} openNewTicketModal={openNewTicketModal} handleClose={handleClose} setNewTicketModal={setNewTicketModal} newTicket={newTicket} setNewTicket={setNewTicket} handleCreateTicketChange={handleCreateTicketChange} createNewTicket={createNewTicket} />}
+        {newTicketModal && (
+          <NewTicketModal
+            newTicketModal={newTicketModal}
+            openNewTicketModal={openNewTicketModal}
+            handleClose={handleClose}
+            setNewTicketModal={setNewTicketModal}
+            newTicket={newTicket}
+            setNewTicket={setNewTicket}
+            handleCreateTicketChange={handleCreateTicketChange}
+            createNewTicket={createNewTicket}
+          />
+        )}
       </div>
     </div>
   );

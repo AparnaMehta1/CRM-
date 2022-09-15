@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+.ticket_Details{
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 0 15px .5px;
+}
+.table_heading th{
+    padding-left: .5rem;
+    padding-right: .5rem;
+    font-weight: bolder;
+    border-bottom: 2px solid black;
+}
+
+.ticket_Details td{
+    border: 1px solid black;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.table_area{
+    /* border-radius: 10px; */
+    border: 1px solid black;
+    width: 100%;
+}
+.table_area tbody{
+    background: #ece5be;
+}
+.edit_icon{
+    cursor: pointer;
+}
+.del_icon{
+    cursor: pointer;
+}

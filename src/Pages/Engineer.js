@@ -9,62 +9,70 @@ import { getTicketsCount } from "../Utils/TicketCount";
 function Engineer() {
   const [ticketList, setTicketList] = useState([]);
   const [ticketUpdateCurr, setTicketUpdateCurr] = useState({});
-  const [ticketUpdateModal, setTicketUpdateModal] = useState(false)
+  const [ticketUpdateModal, setTicketUpdateModal] = useState(false);
   const [ticketsCount, setTicketsCount] = useState({});
 
   const onCloseModal = () => {
-    setTicketUpdateModal(false)
-  }
+    setTicketUpdateModal(false);
+  };
   const cancelUpdate = (e) => {
-    e.preventDefault()
-    setTicketUpdateCurr("")
-    setTicketUpdateModal(false)
-  }
+    e.preventDefault();
+    setTicketUpdateCurr("");
+    setTicketUpdateModal(false);
+  };
 
   useEffect(() => {
-    listOfTicketList()
-  }, [])
+    listOfTicketList();
+  }, []);
 
   const listOfTicketList = () => {
-    fetchTicket().then(res => {
-      if (res.status === 200) {
-        const tickets = res.data
-        setTicketList(tickets)
-        const countMap = getTicketsCount(tickets);
-        setTicketsCount(countMap);
-      }
-    }).catch(err => {
-      console.log(err);
-    })
-  }
+    fetchTicket()
+      .then((res) => {
+        if (res.status === 200) {
+          const tickets = res.data;
+          setTicketList(tickets);
+          const countMap = getTicketsCount(tickets);
+          setTicketsCount(countMap);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const editTicket = (rowData) => {
-    const ticketData = { ...rowData }
-    setTicketUpdateCurr(ticketData)
-    setTicketUpdateModal(true)
+    const ticketData = { ...rowData };
+    setTicketUpdateCurr(ticketData);
+    setTicketUpdateModal(true);
     console.log(rowData);
-  }
+  };
 
   const handleTicketChange = (e) => {
-    const selectedTicket = { ...ticketUpdateCurr }
-    if (e.target.name === "assignee")
-      selectedTicket.assignee = e.target.value;
+    const selectedTicket = { ...ticketUpdateCurr };
+    if (e.target.name === "assignee") selectedTicket.assignee = e.target.value;
     if (e.target.name === "ticketPriority")
       selectedTicket.ticketPriority = e.target.value;
-    setTicketUpdateCurr(selectedTicket)
-  }
+    setTicketUpdateCurr(selectedTicket);
+  };
 
   const onTicketUpdate = (e) => {
     e.preventDefault();
     ticketUpdation(ticketUpdateCurr.id, ticketUpdateCurr)
-      .then(res => {
-        if (res.status === 200)
-          onCloseModal();
+      .then((res) => {
+        if (res.status === 200) onCloseModal();
         listOfTicketList();
-      }).catch(err => {
-        console.log(err);
       })
-  }
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const delTicket = (id) => {
+    const newTicketList = ticketList.filter((t) => {
+      return t.id !== id;
+    });
+    setTicketList(newTicketList);
+  };
   return (
     <>
       <Sidebar />
@@ -75,9 +83,20 @@ function Engineer() {
           <p>Take a look a status of given below</p>
         </div>
         <div className="container">
-          {ticketUpdateModal && <UpdateTicketModal onCloseModal={onCloseModal} ticketUpdateModal={ticketUpdateModal} ticketUpdateCurr={ticketUpdateCurr} cancelUpdate={cancelUpdate} handleTicketChange={handleTicketChange} onTicketUpdate={onTicketUpdate} />}
+          {ticketUpdateModal && (
+            <UpdateTicketModal
+              onCloseModal={onCloseModal}
+              ticketUpdateModal={ticketUpdateModal}
+              ticketUpdateCurr={ticketUpdateCurr}
+              cancelUpdate={cancelUpdate}
+              handleTicketChange={handleTicketChange}
+              onTicketUpdate={onTicketUpdate}
+            />
+          )}
           <StatusCard ticketsCount={ticketsCount} />
-          <TicketTable ticketList={ticketList} editTicket={editTicket} />
+          <div className="table_details mb-5">
+          <TicketTable ticketList={ticketList} editTicket={editTicket} delTicket={delTicket} />
+          </div>
         </div>
       </div>
     </>

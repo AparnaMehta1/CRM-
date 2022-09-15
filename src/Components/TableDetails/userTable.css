@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.userticket_Details td{
+    border: 1px solid black;
+    padding: 10px;
+    width: 100%;    
+    font-weight: bold;
+}
+.userticket_Details{
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 0 15px .5px;
+}
+
+
+.table_data{
+    border-radius: 10px;
+    border: 1px solid black;
+}

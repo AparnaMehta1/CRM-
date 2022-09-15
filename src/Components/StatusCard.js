@@ -1,9 +1,8 @@
 import React from "react";
 import SingleStatusCard from "./SingleStatusCard";
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import AutorenewIcon from '@mui/icons-material/Autorenew';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import BlockIcon from '@mui/icons-material/Block';
+import {FaEdit, FaRegWindowClose, FaCreativeCommonsNc} from 'react-icons/fa';
+import FcBarChart from 'react-icons/fc';
+import MdBlock from 'react-icons/md';
 
 const StatusCard = ({ ticketsCount }) => {
 
@@ -11,7 +10,7 @@ const StatusCard = ({ ticketsCount }) => {
         {
             count: ticketsCount.open,
             statusName: "Open",
-            icon: <ModeEditIcon className="text-primary"/>,
+            icon: <FaEdit className="text-primary"/>,
             colorScheme: "primary",
             textColor: "red",
             pathColor: "blue",
@@ -19,7 +18,7 @@ const StatusCard = ({ ticketsCount }) => {
         {
             count: ticketsCount.progress,
             statusName: "Progress",
-            icon: <AutorenewIcon className="text-warning"/>,
+            icon: <FaCreativeCommonsNc className="text-warning"/>,
             colorScheme: "warning",
             textColor: "red",
             pathColor: "darkgoldenrod",
@@ -27,7 +26,7 @@ const StatusCard = ({ ticketsCount }) => {
         {
             count: ticketsCount.closed,
             statusName: "Closed",
-            icon: <CheckCircleIcon className="text-success"/>,
+            icon: <FaRegWindowClose className="text-success"/>,
             colorScheme: "success",
             textColor: "red",
             pathColor: "lightGreen",
@@ -35,7 +34,7 @@ const StatusCard = ({ ticketsCount }) => {
         {
             count: ticketsCount.blocked,
             statusName: "Blocked",
-            icon: <BlockIcon className="text-secondary"/>,
+            icon: <FaCreativeCommonsNc className="text-secondary"/>,
             colorScheme: "secondary",
             textColor: "red",
             pathColor: "grey",
