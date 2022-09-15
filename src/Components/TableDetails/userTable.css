@@ -22,3 +22,6 @@
     border-radius: 10px;
     border: 1px solid black;
 }
+.usertable_area tbody{
+    background: #ece5be;
+}

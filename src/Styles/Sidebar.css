@@ -1,6 +1,22 @@
+.main_section{
+    position: absolute;
+    height: 100vh;
+    background-color: rgb(0, 0, 0);
+    color: #fff;
+    transition: .5s;
+}
 .logout{
     cursor: pointer;
 }
-.sidebar_icon{
+.sidebar_head{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: .5rem;
+}
+.sidebr_icons{
     font-size: xx-large;
+}
+.sidebar_head:hover{
+    background-color: aqua;
 }

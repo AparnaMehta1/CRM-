@@ -8,6 +8,7 @@ import UserTable from "../Components/TableDetails/UserTable";
 import { getAllUsers } from "../api/user";
 import UserModal from "../Components/Modal/UserModal";
 import { getTicketsCount } from "../Utils/TicketCount";
+import '../Styles/admin.css'
 
 function Admin() {
   const [ticketList, setTicketList] = useState([]);
@@ -135,14 +136,14 @@ function Admin() {
   return (
     <div>
       <Sidebar />
-      <div className="container main_section text-center">
+      <div className="container admin_main_section text-center">
         <h3>Welcome {localStorage.getItem("name")}</h3>
         <h6>User Type: {localStorage.getItem("userTypes")}</h6>
         <div className="message">
           <p>Take a look a status of given below</p>
         </div>
-        <div class="container-fluid ">
-          <div className="list">
+        <div class="container-fluid mx-5">
+          <div className="card_list">
             <StatusCard ticketsCount={ticketsCount} />
           </div>
         </div>

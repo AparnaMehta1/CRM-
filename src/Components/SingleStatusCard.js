@@ -1,4 +1,3 @@
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import './singleStatusCard.css'
 
 const SingleStatusCard = props => {
@@ -25,13 +24,7 @@ const SingleStatusCard = props => {
             </div>
             <div className='col'>
               <div style={{ width: 40, height: 40 }}>
-                <CircularProgressbar
-                  value={count}
-                  styles={buildStyles({
-                    textColor,
-                    pathColor,
-                  })}
-                />
+                
               </div>
             </div>
           </div>

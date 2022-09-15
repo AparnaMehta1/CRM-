@@ -19,7 +19,7 @@ function UserTable({ userList, editUserDetails }) {
   }
 
   return (
-    <div>
+    <div className="table">
         <h4 className='text-primary fw-bolder my-5'>USER DATA</h4>
       <div className="userticket_Details">
         <div className="usertable_area">
