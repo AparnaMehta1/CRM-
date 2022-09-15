@@ -3,17 +3,14 @@ import { DropdownButton, Dropdown } from "react-bootstrap";
 import { userSignup, userSignin } from "../api/auth";
 import { useNavigate } from 'react-router-dom';
 import videoBg from '../Styles/Video/video.mp4'
-import GoogleIcon from '@mui/icons-material/Google';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import GitHubIcon from '@mui/icons-material/GitHub';
+import {BsFacebook, BsTwitter, BsGithub, BsGoogle} from 'react-icons/bs';
 import userIcon from '../Styles/user.svg'
 import '../Styles/Login.css';
 
 function Login() {
   const [signUp, setshowsignUp] = useState(false);
   const [userType, setuserType] = useState("SELECT");
-  const [userSignupData, setUserSignupData] = useState({});
+  const [userSignupData] = useState({});
   const [message, setMessage] = useState("");
 
   const toggleSignUp = () => {
@@ -165,10 +162,10 @@ function Login() {
                   <div className="text-warning text-center">{message}</div>
                 </form>
                 <div className="container mx-5">
-                <GoogleIcon className="social_icon" />
-                <FacebookIcon className="social_icon"/>
-                <TwitterIcon className="social_icon"/>
-                <GitHubIcon className="social_icon"/>
+                <BsGoogle className="social_icon" />
+                <BsFacebook className="social_icon"/>
+                <BsTwitter className="social_icon"/>
+                <BsGithub className="social_icon"/>
                 </div>
               </div>
             ) : (
@@ -239,10 +236,10 @@ function Login() {
                   <div className="text-warning text-center">{message}</div>
                 </form>
                 <div className="container mx-5">
-                <GoogleIcon className="social_icon" />
-                <FacebookIcon className="social_icon"/>
-                <TwitterIcon className="social_icon"/>
-                <GitHubIcon className="social_icon"/>
+                <BsGoogle className="social_icon" />
+                <BsFacebook className="social_icon"/>
+                <BsTwitter className="social_icon"/>
+                <BsGithub className="social_icon"/>
                 </div>
               </div>
             )}
