@@ -1,7 +1,7 @@
 import './singleStatusCard.css'
 
 const SingleStatusCard = props => {
-  const { count, statusName, icon, colorScheme, textColor, pathColor } =
+  const { count, statusName, icon, colorScheme } =
     props;
 
   return (

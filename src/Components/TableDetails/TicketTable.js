@@ -4,9 +4,10 @@ import {AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai'
 import './ticketTable.css'
 import '../../Styles/admin.css'
 
-function TicketTable({ ticketList, editTicket, delTicket }) {
+function TicketTable({ ticketList, editTicket, delTicket, filterTicketsBySearch }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [ticketPerPage] = useState(5);
+  const [search, setSearch] = useState('')
 
   const indexOfLastTicket = currentPage * ticketPerPage;
   const indexOfFirstTicket = indexOfLastTicket - ticketPerPage;
@@ -19,10 +20,18 @@ function TicketTable({ ticketList, editTicket, delTicket }) {
         setCurrentPage(pageNumber)
   }
 
+  const handleSearch = ()=>{
+    filterTicketsBySearch(search)
+  }
   
   return (
     <div className="table">
-        <h4 className='text-primary fw-bolder my-3'>Tickte ID</h4>
+        <h4 className='text-primary fw-bolder mt-3'>TICKET ID</h4>
+        <input type="text" placeholder="Search" className="mb-2"
+          value={search}
+          onChange={(e)=>setSearch(e.target.value)}
+        />
+        <button onClick={()=>handleSearch()}>Search</button>
       <div className="ticket_Details">
         <div className="table_area">
         <table >
@@ -41,7 +50,7 @@ function TicketTable({ ticketList, editTicket, delTicket }) {
               {currentTickets?.map((item) => {
                 const {id, title, description, reporter, ticketPriority, assignee, status} = item
                 return (
-                  <tr>
+                  <tr key={id}>
                     <td>{id}</td>
                     <td>{title}</td>
                     <td>{description}</td>

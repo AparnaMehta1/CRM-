@@ -22,7 +22,7 @@ function Login() {
         const userTypes = localStorage.getItem("userTypes");
         redirectToHomePage(userTypes);
     }
-}, []);
+});
 
   const history = useNavigate();  
   const redirectToHomePage = (userTypes)=>{
@@ -129,7 +129,7 @@ function Login() {
       <div className="login m-5 p-5">
         <div className="signin">
           <div className="col">
-          <center><img src={userIcon} /></center>
+          <center><img src={userIcon} alt='uploading'/></center>
             {!signUp ? (
               <div className="login">
                 <form onSubmit={loginFn}>

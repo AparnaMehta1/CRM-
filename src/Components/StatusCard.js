@@ -1,8 +1,7 @@
 import React from "react";
 import SingleStatusCard from "./SingleStatusCard";
 import {FaEdit, FaRegWindowClose, FaCreativeCommonsNc} from 'react-icons/fa';
-import FcBarChart from 'react-icons/fc';
-import MdBlock from 'react-icons/md';
+
 
 const StatusCard = ({ ticketsCount }) => {
 
@@ -62,7 +61,6 @@ const StatusCard = ({ ticketsCount }) => {
                         colorScheme={colorScheme}
                         textColor={textColor}
                         pathColor={pathColor}
-
                     />
                 );
             })}

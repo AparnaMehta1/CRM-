@@ -3,9 +3,10 @@ import Pagination from "../Pagination/Pagination";
 import {AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai'
 import './userTable.css'
 
-function UserTable({ userList, editUserDetails }) {
+function UserTable({ userList, editUserDetails, filterUsersBySearch }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [ticketPerPage] = useState(35);
+  const [search, setSearch] = useState('')
 
   const indexOfLastTicket = currentPage * ticketPerPage;
   const indexOfFirstTicket = indexOfLastTicket - ticketPerPage;
@@ -18,9 +19,18 @@ function UserTable({ userList, editUserDetails }) {
         setCurrentPage(pageNumber)
   }
 
+  const handleSearch = ()=>{
+    filterUsersBySearch(search)
+  }
+
   return (
-    <div className="table">
-        <h4 className='text-primary fw-bolder my-5'>USER DATA</h4>
+    <div className="table my-3">
+        <h4 className='text-primary fw-bolder mt-3'>USER DATA</h4>
+        <input type="text" placeholder="Search" className="mb-2"
+          value={search}
+          onChange={(e)=>setSearch(e.target.value)}
+        />
+        <button onClick={()=>handleSearch()}>Search</button>
       <div className="userticket_Details">
         <div className="usertable_area">
         <table >
@@ -36,7 +46,7 @@ function UserTable({ userList, editUserDetails }) {
             <tbody>
               {currentTickets?.map((item) => {
                 return (
-                  <tr>
+                  <tr key={item.id}>
                     <td>{item.userId}</td>
                     <td>{item.name}</td>
                     <td>{item.email}</td>

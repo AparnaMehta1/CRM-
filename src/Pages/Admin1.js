@@ -126,6 +126,28 @@ function Admin() {
     setUserDetails(selectedUser);
   };
 
+  const filterTicketsBySearch = searchText => {
+    const filteredTicket = ticketList.filter(t => {
+        if(searchText === ''){
+          return t;
+        }else{
+          return t.title.toLowerCase().includes(searchText.toLowerCase());
+        }
+    });
+    setTicketList(filteredTicket);
+};
+
+const filterUsersBySearch = searchText => {
+  const filteredUser = userList.filter(t => {
+      if(searchText === ''){
+        return t;
+      }else{
+        return t.name.toLowerCase().includes(searchText.toLowerCase());
+      }
+  });
+  setUserList(filteredUser);
+};
+
   const delTicket = (id)=>{
       const newTicketList = ticketList.filter((t)=>{
         return t.id !== id
@@ -148,7 +170,7 @@ function Admin() {
           </div>
         </div>
         {loader ? (
-          <img src="https://i.pinimg.com/originals/f9/41/ae/f941ae9d16fd7d2957eea6e5b1100d1e.gif" />
+          <img src="https://i.pinimg.com/originals/f9/41/ae/f941ae9d16fd7d2957eea6e5b1100d1e.gif" alt=""/>
         ) : (
           <TicketTable
             ticketList={ticketList}
@@ -157,16 +179,19 @@ function Admin() {
             editTicket={editTicket}
             listOfTicket={listOfTicket}
             delTicket={delTicket}
+            filterTicketsBySearch={filterTicketsBySearch}
           />
         )}
+        <hr />
         {loader ? (
-          <img src="https://i.pinimg.com/originals/f9/41/ae/f941ae9d16fd7d2957eea6e5b1100d1e.gif" />
+          <img src="https://i.pinimg.com/originals/f9/41/ae/f941ae9d16fd7d2957eea6e5b1100d1e.gif" alt=""/>
         ) : (
           <div className="my-3">
             <UserTable
               userList={userList}
               editUserDetails={editUserDetails}
               userDetails={userDetails}
+              filterUsersBySearch={filterUsersBySearch}
             />
           </div>
         )}
