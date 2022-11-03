@@ -44,6 +44,7 @@ function Admin() {
   const listOfTicket = () => {
     setLoader(true);
     fetchTicket()
+
       .then(function (response) {
         if (response.status === 200) {
           console.log(response);
@@ -125,6 +126,12 @@ function Admin() {
 
     setUserDetails(selectedUser);
   };
+  const deleteUserDetails = (item) => {
+  userList.filter((user)=>{
+    return user.id !== item.id
+  })
+  }
+  
 
   const filterTicketsBySearch = searchText => {
     const filteredTicket = ticketList.filter(t => {
@@ -192,6 +199,7 @@ const filterUsersBySearch = searchText => {
               editUserDetails={editUserDetails}
               userDetails={userDetails}
               filterUsersBySearch={filterUsersBySearch}
+              deleteUserDetails = {deleteUserDetails}
             />
           </div>
         )}

@@ -3,7 +3,7 @@ import Pagination from "../Pagination/Pagination";
 import {AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai'
 import './userTable.css'
 
-function UserTable({ userList, editUserDetails, filterUsersBySearch }) {
+function UserTable({ userList,deleteUserDetails,  editUserDetails, filterUsersBySearch }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [ticketPerPage] = useState(35);
   const [search, setSearch] = useState('')
@@ -14,6 +14,7 @@ function UserTable({ userList, editUserDetails, filterUsersBySearch }) {
     indexOfFirstTicket,
     indexOfLastTicket
   );
+ 
 
   const handlePaginate = (pageNumber)=>{
         setCurrentPage(pageNumber)
@@ -52,7 +53,7 @@ function UserTable({ userList, editUserDetails, filterUsersBySearch }) {
                     <td>{item.email}</td>
                     <td>{item.userTypes}</td>
                     <td>{item.userStatus}</td>
-                    <td><AiOutlineEdit onClick={()=>editUserDetails(item)}/> <AiOutlineDelete /> </td>
+                    <td><AiOutlineEdit onClick={()=>editUserDetails(item)}/> <AiOutlineDelete onClick={()=>deleteUserDetails(item.userId)} /> </td>
                   </tr>
                 );
               })}
